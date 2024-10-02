@@ -16,7 +16,7 @@ const rotas = new SharedArray('rotas', function () {
 });
 
 function request(config, rota) {
-    const url = 'http://xxx/'+rota;
+    const url = 'https://www.claro.com.br/'+rota;
     console.log(url)
     return http.get(url);
 }

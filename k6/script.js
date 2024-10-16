@@ -1,12 +1,14 @@
 import http from 'k6/http';
-import { sleep } from 'k6';
 
 export const options = {
-  vus: 10,
+  vus: 100,
   duration: '30s',
 };
 
 export default function () {
-    http.get('http://test.k6.io');
-    sleep(1);
+
+    const request = http.get('https://g1.globo.com/ac/acre/eleicoes/2024/resultado-das-apuracoes/porto-acre.ghtml');
+    
+    console.log('Status Code: ', request.status)
+    
 };

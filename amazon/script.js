@@ -1,5 +1,5 @@
-import { sleep } from 'k6';
 import http from 'k6/http';
+import { sleep, check } from 'k6';
 
 export const options = {
   cloud: {
@@ -11,7 +11,7 @@ export const options = {
   },
   thresholds: {},
   scenarios: {
-    Scenario_1: {
+    globo: {
       executor: 'ramping-vus',
       gracefulStop: '30s',
       stages: [
@@ -20,17 +20,14 @@ export const options = {
         { target: 0, duration: '15s' },
       ],
       gracefulRampDown: '30s',
-      exec: 'scenario_1',
+      exec: 'globo',
     },
   },
 };
 
-export function scenario_1() {
-  let response;
-
-  // Get homepage
-  response = http.get('https://test.k6.io/');
-
-  // Automatically added sleep
-  sleep(1);
+export function globo() {
+  
+  const response = http.get('https://www.globo.com/');
+  check(response, { 'status was 200': (r) => r.status == 200 });
+  sleep(0.1);
 }

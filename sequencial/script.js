@@ -1,41 +1,40 @@
 import http from 'k6/http';
-import { check, sleep } from 'k6';
+import { check } from 'k6';
 
 export const options = {
   stages: [
     { duration: '10s', target: 10 },
-    { duration: '10s', target: 20 },
+    { duration: '10s', target: 10 },
     { duration: '10s', target: 0 },
   ],
 };
 
-function url1() {
-  const res = http.get('https://globo.com/');
+function globo() {
+  const res = http.get('https://www.globo.com/');
   check(res, { 'status was 200': (r) => r.status == 200 });
-  sleep(1);
 }
 
-function url2() {
-  const res = http.get('https://globo.com/');
+function g1() {
+  const res = http.get('https://g1.globo.com/');
   check(res, { 'status was 200': (r) => r.status == 200 });
-  sleep(1);
+
 }
 
-function url3() {
-  const res = http.get('https://globo.com/');
+function ge() {
+  const res = http.get('https://ge.globo.com/');
   check(res, { 'status was 200': (r) => r.status == 200 });
-  sleep(1);
+
 }
 
-function url4() {
-  const res = http.get('https://globo.com/');
+function gshow() {
+  const res = http.get('https://gshow.globo.com/');
   check(res, { 'status was 200': (r) => r.status == 200 });
-  sleep(1);
+
 }
 
 export default function testSuite() {
-  url1();
-  url2();
-  url3();
-  url4();
+  globo();
+  g1();
+  ge();
+  gshow();
 }

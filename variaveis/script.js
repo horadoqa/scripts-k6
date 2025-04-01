@@ -10,11 +10,11 @@ export const options = {
 };
 
 export default function () {
-  const response = http.get(`${__ENV.MY_HOSTNAME}/`);
+  const response = http.get(`${__ENV.MY_HOSTNAME}`);
 
-  console.log('Test k6: ', response.status);
+  // console.log('Status Code: ', response.status);
   
   check(response, {
-    'status é 200': (r) => r.status === 200,
+    'Status é 200': (r) => r.status === 200,
   });
 }
